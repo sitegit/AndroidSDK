@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AndroidSDK</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_1">Фрагмент 1</string>
+    <string name="next">Следующий</string>
+    <string name="prev">Предыдущий</string>
+    <string name="fragment_2">Фрагмент 2</string>
+    <string name="fragment_3">Фрагмент 3</string>
+</resources>
