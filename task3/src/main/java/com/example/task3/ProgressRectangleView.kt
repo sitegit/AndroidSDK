@@ -16,7 +16,7 @@ import kotlin.random.Random
 class ProgressRectangleView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = INITIAL_ATTR,
 ) : View(context, attrs, defStyleAttr) {
 
     private val paint = Paint().apply {
@@ -30,17 +30,17 @@ class ProgressRectangleView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         paint.color = Color.LTGRAY
-        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
+        canvas.drawRect(START_COORDINATE, START_COORDINATE, width.toFloat(), height.toFloat(), paint)
 
         paint.color = currentColor
         val fillWidth = width * (progress / 100f)
-        canvas.drawRect(0f, 0f, fillWidth, height.toFloat(), paint)
+        canvas.drawRect(START_COORDINATE, START_COORDINATE, fillWidth, height.toFloat(), paint)
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
-            progress += 10f
+            progress += PROGRESS_INCREMENT
             if (progress > 100f) progress = 0f
             currentColor = generateRandomColor()
             invalidate()
@@ -74,9 +74,9 @@ class ProgressRectangleView @JvmOverloads constructor(
 
     private fun generateRandomColor(): Int {
         return Color.rgb(
-            Random.nextInt(256),
-            Random.nextInt(256),
-            Random.nextInt(256)
+            Random.nextInt(RGB_MAX_VALUE),
+            Random.nextInt(RGB_MAX_VALUE),
+            Random.nextInt(RGB_MAX_VALUE)
         )
     }
 
@@ -84,5 +84,10 @@ class ProgressRectangleView @JvmOverloads constructor(
         private const val PROGRESS = "progress"
         private const val CURRENT_COLOR = "currentColor"
         private const val SUPER_STATE = "superState"
+
+        private const val PROGRESS_INCREMENT = 10f
+        private const val RGB_MAX_VALUE = 256
+        private const val START_COORDINATE = 0f
+        private const val INITIAL_ATTR = 0
     }
 }
